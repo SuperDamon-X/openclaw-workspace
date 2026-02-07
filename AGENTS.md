@@ -305,3 +305,32 @@ The goal: Be helpful without being annoying. Check in a few times a day, do usef
 ## Make It Yours
 
 This is a starting point. Add your own conventions, style, and rules as you figure out what works.
+
+---
+
+## Skills
+
+### Installed Skills
+- **clawhub** - ClawHub CLI for skill management
+- **github** - GitHub CLI interaction
+- **brainrepo** - Personal knowledge repository (PARA + Zettelkasten)
+- **browse** - Browser automation with stagehand CLI
+
+### Custom Skills
+- **link-collector** - 自动采集网页内容，保存为 Markdown 格式到素材库
+  - 位置：`skills/link-collector/`
+  - 功能：提取标题、正文、标签，自动保存到 `assets/素材/` 目录
+  - 触发词：采集、保存、网页、链接
+  - 使用方式：发送"采集 [URL]"即可自动采集并保存
+- **tavily-search** - 联网技能，Tavily 搜索 API 集成
+  - 位置：`skills/tavily-search/`
+  - 功能：联网搜索，获取实时信息
+  - 作用：解决信息滞后问题，让 Agent 能"睁眼看世界"
+- **find-skills** - 主动找技能解决问题
+  - 位置：`skills/find-skills/`
+  - 功能：自动搜索和发现可用的技能
+  - 作用：减少用户手动询问，提高解决问题的效率
+- **proactive-agent-1-2-4** - 主动代理 Agent，自我迭代升级技能
+  - 位置：`skills/proactive-agent-1-2-4/`
+  - 功能：Agent 自我反思、迭代和升级
+  - 作用：提升 Agent 能力，无需人工干预即可自我优化
