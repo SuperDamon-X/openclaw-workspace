@@ -1,138 +1,168 @@
 ---
 name: skill-vetter
-version: 1.0.0
-description: Security-first skill vetting for AI agents. Use before installing any skill from ClawdHub, GitHub, or other sources. Checks for red flags, permission scope, and suspicious patterns.
+description: 专业的软件安全审计 AI。在下载或安装技能前进行安全风险评估，检查来源可信度、权限、漏洞、恶意行为、隐私合规等风险。
+metadata:
+  {
+    "openclaw":
+      {
+        "triggers": ["安装", "下载", "skill", "技能", "安全审计", "风险评估"],
+      },
+  }
 ---
 
-# Skill Vetter 🔒
+# Skill-Vetter - 安全审计 AI
 
-Security-first vetting protocol for AI agent skills. **Never install a skill without vetting it first.**
+专业的软件安全审计工具，用于在下载或安装技能前进行全面的安全风险评估。
 
-## When to Use
+## 触发场景
 
-- Before installing any skill from ClawdHub
-- Before running skills from GitHub repos
-- When evaluating skills shared by other agents
-- Anytime you're asked to install unknown code
+当以下情况触发时自动审计：
+- 用户准备安装新技能
+- 从外部来源下载技能
+- ClawHub 搜索或安装
+- 用户询问技能安全性
 
-## Vetting Protocol
+## 审计框架
 
-### Step 1: Source Check
+基于以下安全标准进行评估：
+- OWASP 安全风险评估
+- 供应链安全分析
+- 隐私与数据保护合规性（GDPR/CCPA）
+- 威胁建模与攻击面分析
+
+## 审计维度
+
+### 1. 技能来源可信度
+- **官方来源**：ClawHub 官方、GitHub 认证组织
+- **社区验证**：Star 数、Fork 数、更新频率
+- **代码透明度**：源代码可用性、文档完整性
+- **作者信誉**：历史贡献、社区反馈
+
+### 2. 权限合理性
+- **文件访问**：读写敏感目录（~/.ssh、~/.aws等）
+- **网络访问**：外连请求、数据上传
+- **系统修改**：配置更改、服务重启
+- **进程执行**：命令运行、脚本执行
+
+### 3. 潜在安全漏洞
+- **注入攻击**：命令注入、代码注入
+- **路径遍历**：任意文件访问
+- **权限提升**：越权访问
+- **拒绝服务**：资源耗尽
+
+### 4. 恶意行为模式
+- **数据外泄**：上传敏感信息到外部服务器
+- **持久化**：创建后门、定时任务
+- **横向移动**：扫描网络、攻击其他系统
+- **加密货币挖矿**：异常 CPU 使用
+
+### 5. 隐私与数据合规
+- **数据收集**：收集哪些信息、用途
+- **第三方依赖**：npm 包、CDN 资源
+- **数据存储**：本地存储、云端同步
+
+### 6. 供应链风险
+- **依赖树分析**：直接/间接依赖
+- **供应链攻击**：恶意包投毒
+- **版本锁定**：依赖版本固定性
+
+## 审计流程
+
+1. **信息收集**
+   - 读取技能配置（SKILL.md、package.json）
+   - 检查代码仓库（GitHub）
+   - 分析依赖关系
+
+2. **威胁建模**
+   - 识别攻击面
+   - 评估潜在影响
+   - 确定风险优先级
+
+3. **风险评估**
+   - 量化风险等级（高/中/低）
+   - 生成风险清单
+   - 提供缓解建议
+
+4. **决策输出**
+   - 按标准格式输出报告
+   - 明确是否建议安装
+
+## 输出格式
 
 ```
-Questions to answer:
-- [ ] Where did this skill come from?
-- [ ] Is the author known/reputable?
-- [ ] How many downloads/stars does it have?
-- [ ] When was it last updated?
-- [ ] Are there reviews from other agents?
+=== 安全审计报告 ===
+
+【总体风险评级】⚠️ 高风险 / ⚠️ 中风险 / ✅ 低风险
+
+【风险点列表】
+
+风险点 1：[描述]
+- 详细说明：...
+- 潜在影响：...
+- 安全建议：...
+
+风险点 2：[描述]
+...
+
+【审计假设】
+(当信息不足时说明假设)
+
+【最终建议】
+❌ 不建议安装 / ✅ 可以安装（附带条件）
 ```
 
-### Step 2: Code Review (MANDATORY)
+## 风险评级标准
 
-Read ALL files in the skill. Check for these **RED FLAGS**:
+- 🔴 **高风险**：存在严重安全漏洞或明显恶意行为
+- 🟡 **中风险**：权限过度或存在潜在风险，需谨慎
+- 🟢 **低风险**：经过验证，风险可控
 
+## 使用示例
+
+**用户：**
 ```
-🚨 REJECT IMMEDIATELY IF YOU SEE:
-─────────────────────────────────────────
-• curl/wget to unknown URLs
-• Sends data to external servers
-• Requests credentials/tokens/API keys
-• Reads ~/.ssh, ~/.aws, ~/.config without clear reason
-• Accesses MEMORY.md, USER.md, SOUL.md, IDENTITY.md
-• Uses base64 decode on anything
-• Uses eval() or exec() with external input
-• Modifies system files outside workspace
-• Installs packages without listing them
-• Network calls to IPs instead of domains
-• Obfuscated code (compressed, encoded, minified)
-• Requests elevated/sudo permissions
-• Accesses browser cookies/sessions
-• Touches credential files
-─────────────────────────────────────────
+帮我安装这个技能 clawhub install xyz-skill
 ```
 
-### Step 3: Permission Scope
-
+**审计响应：**
 ```
-Evaluate:
-- [ ] What files does it need to read?
-- [ ] What files does it need to write?
-- [ ] What commands does it run?
-- [ ] Does it need network access? To where?
-- [ ] Is the scope minimal for its stated purpose?
-```
+=== 安全审计报告 ===
 
-### Step 4: Risk Classification
+正在审计技能：xyz-skill
+来源：https://github.com/unknown/xyz-skill
 
-| Risk Level | Examples | Action |
-|------------|----------|--------|
-| 🟢 LOW | Notes, weather, formatting | Basic review, install OK |
-| 🟡 MEDIUM | File ops, browser, APIs | Full code review required |
-| 🔴 HIGH | Credentials, trading, system | Human approval required |
-| ⛔ EXTREME | Security configs, root access | Do NOT install |
+【总体风险评级】🟡 中风险
 
-## Output Format
+【风险点列表】
 
-After vetting, produce this report:
+风险点 1：权限要求过高
+- 详细说明：技能要求访问 ~/.ssh 和 ~/.aws 目录
+- 潜在影响：可能读取敏感凭证（SSH 私钥、AWS 凭证）
+- 安全建议：审查代码中是否有凭证读取逻辑，仅允许访问必要目录
 
-```
-SKILL VETTING REPORT
-═══════════════════════════════════════
-Skill: [name]
-Source: [ClawdHub / GitHub / other]
-Author: [username]
-Version: [version]
-───────────────────────────────────────
-METRICS:
-• Downloads/Stars: [count]
-• Last Updated: [date]
-• Files Reviewed: [count]
-───────────────────────────────────────
-RED FLAGS: [None / List them]
+风险点 2：网络外连未知
+- 详细说明：skill.json 中配置了多个外部 API 调用
+- 潜在影响：数据可能上传到未验证的服务器
+- 安全建议：检查所有外连 URL，确保使用 HTTPS
 
-PERMISSIONS NEEDED:
-• Files: [list or "None"]
-• Network: [list or "None"]  
-• Commands: [list or "None"]
-───────────────────────────────────────
-RISK LEVEL: [🟢 LOW / 🟡 MEDIUM / 🔴 HIGH / ⛔ EXTREME]
+风险点 3：社区验证不足
+- 详细说明：GitHub 仓库无 Star、无 Fork、最近无更新
+- 潜在影响：可能是废弃代码或恶意仓库
+- 安全建议：查看代码质量和提交历史
 
-VERDICT: [✅ SAFE TO INSTALL / ⚠️ INSTALL WITH CAUTION / ❌ DO NOT INSTALL]
+【审计假设】
+假设：代码库内容未经过安全审计，需要人工审查关键逻辑
 
-NOTES: [Any observations]
-═══════════════════════════════════════
+【最终建议】
+⚠️ 谨慎安装
+- 手动审查代码后可安装
+- 建议使用沙盒环境测试
+- 监控安装后的网络活动
 ```
 
-## Quick Vet Commands
+## 安全准则
 
-For GitHub-hosted skills:
-```bash
-# Check repo stats
-curl -s "https://api.github.com/repos/OWNER/REPO" | jq '{stars: .stargazers_count, forks: .forks_count, updated: .updated_at}'
-
-# List skill files
-curl -s "https://api.github.com/repos/OWNER/REPO/contents/skills/SKILL_NAME" | jq '.[].name'
-
-# Fetch and review SKILL.md
-curl -s "https://raw.githubusercontent.com/OWNER/REPO/main/skills/SKILL_NAME/SKILL.md"
-```
-
-## Trust Hierarchy
-
-1. **Official OpenClaw skills** → Lower scrutiny (still review)
-2. **High-star repos (1000+)** → Moderate scrutiny
-3. **Known authors** → Moderate scrutiny
-4. **New/unknown sources** → Maximum scrutiny
-5. **Skills requesting credentials** → Human approval always
-
-## Remember
-
-- No skill is worth compromising security
-- When in doubt, don't install
-- Ask your human for high-risk decisions
-- Document what you vet for future reference
-
----
-
-*Paranoia is a feature.* 🔒🦀
+- **安全优先**：宁可误判高风险，也不漏判高风险
+- **透明解释**：清楚说明判断依据和假设
+- **用户自主**：最终决策权在用户，只提供建议
+- **持续学习**：记录审计案例，提升识别能力

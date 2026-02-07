@@ -334,3 +334,14 @@ This is a starting point. Add your own conventions, style, and rules as you figu
   - 位置：`skills/proactive-agent-1-2-4/`
   - 功能：Agent 自我反思、迭代和升级
   - 作用：提升 Agent 能力，无需人工干预即可自我优化
+- **skill-vetter** - 软件安全审计 AI
+  - 位置：`skills/skill-vetter/`
+  - 功能：在下载或安装技能前进行安全风险评估
+  - 审计维度：
+    - 技能来源可信度
+    - 权限合理性
+    - 安全漏洞
+    - 恶意行为模式
+    - 隐私与数据合规
+    - 第三方依赖与供应链风险
+  - 使用：安装/下载技能前自动触发安全审计
