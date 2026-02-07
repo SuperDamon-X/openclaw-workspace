@@ -1,0 +1,50 @@
+{
+  "name": "项目任务",
+  "default_view": {
+    "type": "grid"
+  },
+  "fields": [
+    {
+      "field_name": "任务名称",
+      "type": 1
+    },
+    {
+      "field_name": "状态",
+      "type": 3,
+      "property": {
+        "options": [
+          { "name": "待开始", "color": "grey" },
+          { "name": "进行中", "color": "blue" },
+          { "name": "已完成", "color": "green" },
+          { "name": "已暂停", "color": "orange" }
+        ]
+      }
+    },
+    {
+      "field_name": "优先级",
+      "type": 3,
+      "property": {
+        "options": [
+          { "name": "低", "color": "green" },
+          { "name": "中", "color": "orange" },
+          { "name": "高", "color": "red" }
+        ]
+      }
+    },
+    {
+      "field_name": "截止日期",
+      "type": 5
+    },
+    {
+      "field_name": "负责人",
+      "type": 17
+    },
+    {
+      "field_name": "备注",
+      "type": 1,
+      "property": {
+        "multi_line": true
+      }
+    }
+  ]
+}

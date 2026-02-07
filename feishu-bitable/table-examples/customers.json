@@ -1,0 +1,62 @@
+{
+  "name": "客户管理",
+  "default_view": {
+    "type": "grid"
+  },
+  "fields": [
+    {
+      "field_name": "客户名称",
+      "type": 1
+    },
+    {
+      "field_name": "联系人",
+      "type": 1
+    },
+    {
+      "field_name": "电话",
+      "type": 11
+    },
+    {
+      "field_name": "邮箱",
+      "type": 18
+    },
+    {
+      "field_name": "公司",
+      "type": 1
+    },
+    {
+      "field_name": "客户状态",
+      "type": 3,
+      "property": {
+        "options": [
+          { "name": "潜在客户", "color": "grey" },
+          { "name": "跟进中", "color": "blue" },
+          { "name": "成交", "color": "green" },
+          { "name": "流失", "color": "red" }
+        ]
+      }
+    },
+    {
+      "field_name": "客户等级",
+      "type": 3,
+      "property": {
+        "options": [
+          { "name": "普通", "color": "green" },
+          { "name": "VIP", "color": "orange" },
+          { "name": "战略客户", "color": "red" }
+        ]
+      }
+    },
+    {
+      "field_name": "最后联系时间",
+      "type": 5
+    },
+    {
+      "field_name": "备注",
+      "type": 1,
+      "property": {
+        "multi_line": true
+      }
+    }
+  ]
+}

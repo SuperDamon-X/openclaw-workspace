@@ -1,0 +1,25 @@
+# Dependencies
+node_modules/
+package-lock.json
+
+# Build outputs
+*.log
+*.tmp
+*.cache
+
+# Temporary files
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Large files (optional)
+*.exe
+*.traineddata
+
+# Private files (adjust as needed)
+# secrets.json
+# config.local.json

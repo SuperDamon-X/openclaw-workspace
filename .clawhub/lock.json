@@ -1,0 +1,109 @@
+{
+  "version": 1,
+  "skills": {
+    "markdown-formatter": {
+      "version": "1.0.0",
+      "installedAt": 1770269718210
+    },
+    "memorylayer": {
+      "version": "1.0.0",
+      "installedAt": 1770269748643
+    },
+    "landing-page-generator": {
+      "version": "1.0.0",
+      "installedAt": 1770269820053
+    },
+    "smart-model-switching": {
+      "version": "1.0.0",
+      "installedAt": 1770269859404
+    },
+    "safe-exec-0-3-2": {
+      "version": "1.0.0",
+      "installedAt": 1770269895100
+    },
+    "crypto-levels": {
+      "version": "1.0.3",
+      "installedAt": 1770307519572
+    },
+    "debug-pro": {
+      "version": "1.0.0",
+      "installedAt": 1770307645318
+    },
+    "test-runner": {
+      "version": "1.0.0",
+      "installedAt": 1770307652514
+    },
+    "nextjs-expert": {
+      "version": "1.0.0",
+      "installedAt": 1770307662972
+    },
+    "code-mentor": {
+      "version": "1.0.2",
+      "installedAt": 1770307676602
+    },
+    "task-status": {
+      "version": "1.0.0",
+      "installedAt": 1770308068061
+    },
+    "deepwork-tracker": {
+      "version": "0.1.1",
+      "installedAt": 1770308073954
+    },
+    "docker-essentials": {
+      "version": "1.0.0",
+      "installedAt": 1770308083392
+    },
+    "github": {
+      "version": "1.0.0",
+      "installedAt": 1770308089531
+    },
+    "coolify": {
+      "version": "2.0.3",
+      "installedAt": 1770308104297
+    },
+    "healthcheck": {
+      "version": "1.0.2",
+      "installedAt": 1770308120846
+    },
+    "skill-vetter": {
+      "version": "1.0.0",
+      "installedAt": 1770308127629
+    },
+    "browse": {
+      "version": "1.0.1",
+      "installedAt": 1770308144576
+    },
+    "webapp-testing": {
+      "version": "0.1.0",
+      "installedAt": 1770308150285
+    },
+    "fail2ban-reporter": {
+      "version": "1.0.0",
+      "installedAt": 1770308289357
+    },
+    "git-crypt-backup": {
+      "version": "1.0.0",
+      "installedAt": 1770308297776
+    },
+    "ddg": {
+      "version": "1.0.0",
+      "installedAt": 1770309987614
+    },
+    "rememberall": {
+      "version": "1.1.0",
+      "installedAt": 1770310010292
+    },
+    "clonev": {
+      "version": "1.0.0",
+      "installedAt": 1770310041632
+    },
+    "seo-competitor-analysis": {
+      "version": "1.0.0",
+      "installedAt": 1770310060989
+    },
+    "nano-banana-pro": {
+      "version": "1.0.1",
+      "installedAt": 1770310105286
+    }
+  }
+}
