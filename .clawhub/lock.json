@@ -104,6 +104,18 @@
     "nano-banana-pro": {
       "version": "1.0.1",
       "installedAt": 1770310105286
+    },
+    "tavily-search": {
+      "version": "1.0.0",
+      "installedAt": 1770487678458
+    },
+    "find-skills": {
+      "version": "0.1.0",
+      "installedAt": 1770487697201
+    },
+    "proactive-agent-1-2-4": {
+      "version": "1.0.0",
+      "installedAt": 1770487701945
     }
   }
 }
