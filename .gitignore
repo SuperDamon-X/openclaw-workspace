@@ -23,3 +23,7 @@ Thumbs.db
 # Private files (adjust as needed)
 # secrets.json
 # config.local.json
+
+# Clawdbot
+!Clawdbot-feishu/
+!Clawdbot-feishu/**
