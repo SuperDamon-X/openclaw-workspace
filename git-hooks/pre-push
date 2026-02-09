@@ -1,0 +1,14 @@
+#!/usr/bin/env sh
+set -eu
+
+# Fast pre-push gate: refuse pushing dump folders that should never be versioned.
+repo_root="$(git rev-parse --show-toplevel)"
+cd "$repo_root"
+
+if git diff --name-only --diff-filter=ACMRT origin/master...HEAD 2>/dev/null | grep -qE '^skills/\.skills_full_'; then
+  echo "ERROR: Refusing push: skills/.skills_full_* dumps detected in range."
+  exit 1
+fi
+
+exit 0
+

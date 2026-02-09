@@ -1,6 +1,8 @@
 param(
   [string]$StateDir = "C:\\Users\\Administrator\\.openclaw",
-  [switch]$Fix = $true,
+  [switch]$Fix = $false,
+  [ValidateSet("YES")]
+  [string]$ConfirmFix,
   [switch]$RestartGateway = $true,
   [switch]$EnsureBrowser = $true,
   [string]$BrowserProfile = "chrome"
@@ -32,8 +34,11 @@ function Run([string]$cmd, [int]$timeoutSeconds = 180) {
 }
 
 if (-not $Fix) {
-  Write-Host "Fix is disabled. Re-run with -Fix to apply repairs."
+  Write-Host "Fix is disabled. Re-run with: -Fix -ConfirmFix YES"
   exit 0
+}
+if ($ConfirmFix -ne "YES") {
+  throw "Refusing to run repairs without explicit confirmation. Re-run with: -Fix -ConfirmFix YES"
 }
 
 Step "OpenClaw doctor + security audit"
@@ -57,4 +62,3 @@ if ($EnsureBrowser) {
 
 Step "Health check"
 Run "cd $StateDir; openclaw health --timeout 10000" 60
-

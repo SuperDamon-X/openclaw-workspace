@@ -5,7 +5,7 @@ description: Prevent and resolve GitHub secret-scanning “push protection” bl
 
 # Git Secrets Guard
 
-## Workflow
+## Workflow (report → then fix)
 
 Goal: keep the repo pushable without ever committing secrets.
 
@@ -41,3 +41,12 @@ git push --force-with-lease origin master
 - Add ignore rules for dump folders (example already used): `skills/.skills_full_*/`
 - Treat any detected secret as compromised: rotate/revoke it.
 - Never store secrets in git; prefer `C:\Users\Administrator\.openclaw\credentials\` for local-only state.
+
+4) Install local guardrails (recommended)
+
+This repo is configured to use `core.hooksPath=git-hooks`. Ensure the folder exists and contains hooks:
+
+- `C:\Users\Administrator\.openclaw\workspace\git-hooks\pre-commit`
+- `C:\Users\Administrator\.openclaw\workspace\git-hooks\pre-push`
+
+These hooks block committing/pushing `skills/.skills_full_*` and catch common secret patterns early.

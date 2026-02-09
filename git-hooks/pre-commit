@@ -1,0 +1,30 @@
+#!/usr/bin/env sh
+set -eu
+
+# Block committing large dump folders and obvious secret patterns.
+# This repo uses `core.hooksPath=git-hooks`.
+
+repo_root="$(git rev-parse --show-toplevel)"
+cd "$repo_root"
+
+# 1) Block dump folders
+if git diff --cached --name-only | grep -qE '^skills/\.skills_full_'; then
+  echo "ERROR: Refusing commit: skills/.skills_full_* dumps must not be committed."
+  echo "Add or keep: skills/.skills_full_*/ in .gitignore"
+  exit 1
+fi
+
+# 2) Quick staged content scan (best-effort)
+tmp="$(mktemp)"
+trap 'rm -f "$tmp"' EXIT
+
+git diff --cached -U0 > "$tmp" || true
+
+if grep -qE 'sk_live_[0-9A-Za-z]{20,}|AIza[0-9A-Za-z_-]{20,}|BEGIN (RSA|OPENSSH|EC|DSA) PRIVATE KEY|client_secret|refresh_token' "$tmp"; then
+  echo "ERROR: Refusing commit: staged changes look like they contain secrets."
+  echo "Remove the secret and rotate/revoke it if exposed."
+  exit 1
+fi
+
+exit 0
+

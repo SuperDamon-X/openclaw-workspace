@@ -9,7 +9,20 @@ description: Diagnose and self-heal an OpenClaw installation on Windows (gateway
 
 Goal: get back to a stable, repeatable “green” state (gateway ok, Feishu ok, models usable, browser CDP ready, git clean).
 
-1) Collect facts (read-only)
+0) Always start with a report (read-only)
+
+```powershell
+cd C:\Users\Administrator\.openclaw\workspace
+powershell -NoProfile -ExecutionPolicy Bypass -File .\skills\openclaw-maintainer\scripts\report.ps1
+```
+
+If you suspect “API 冲突/401/403/timeout” or scheduled-task issues, run the deep report:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\skills\openclaw-maintainer\scripts\report.ps1 -Deep
+```
+
+1) Collect facts (quick triage, read-only)
 
 Run the bundled triage script (read-only by default):
 
@@ -39,7 +52,7 @@ Or run the bundled repair wrapper (includes optional gateway restart + browser e
 
 ```powershell
 cd C:\Users\Administrator\.openclaw\workspace
-powershell -NoProfile -ExecutionPolicy Bypass -File .\skills\openclaw-maintainer\scripts\repair.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File .\skills\openclaw-maintainer\scripts\repair.ps1 -Fix -ConfirmFix YES
 ```
 
 If the watchdog keeps restarting, check `C:\Users\Administrator\.openclaw\watchdog.log` and confirm the scheduled task `OpenClaw Gateway (Interactive)` exists and points at `C:\Users\Administrator\.openclaw\gateway.cmd`.
@@ -87,5 +100,9 @@ See: `references/github-push.md`.
 ## Guardrails (security)
 
 - Never paste/store tokens in git.
-- Prefer “read-only triage” first; only run “fix mode” when the failure mode is clear.
+- Prefer “report-only” first; only run “fix mode” after reviewing the report.
 - For any operation that edits `openclaw.json` / scheduled tasks / services, keep a backup and report exactly what changed.
+
+## More scenarios
+
+See `references/scenarios.md` for additional hypotheses and flows beyond the cases we’ve already hit in this workspace.
