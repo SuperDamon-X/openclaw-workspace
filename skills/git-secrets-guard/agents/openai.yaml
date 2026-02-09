@@ -1,0 +1,4 @@
+interface:
+  display_name: "Git Secrets Guard"
+  short_description: "Prevent/resolve secret-scanning push blocks"
+  default_prompt: "Scan the repo for secrets, block risky paths, and guide safe remediation (remove secrets from history, add ignores, and rotate exposed keys)."

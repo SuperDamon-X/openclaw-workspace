@@ -18,6 +18,13 @@ cd C:\Users\Administrator\.openclaw\workspace
 powershell -NoProfile -ExecutionPolicy Bypass -File .\skills\openclaw-maintainer\scripts\triage.ps1
 ```
 
+Optional: check for common port conflicts (read-only):
+
+```powershell
+cd C:\Users\Administrator\.openclaw\workspace
+powershell -NoProfile -ExecutionPolicy Bypass -File .\skills\openclaw-maintainer\scripts\ports.ps1
+```
+
 2) If gateway/service is flapping or “Connection error”
 
 Run OpenClaw repair (safe defaults, non-interactive):
@@ -26,6 +33,13 @@ Run OpenClaw repair (safe defaults, non-interactive):
 cd C:\Users\Administrator\.openclaw
 openclaw doctor --deep --repair --non-interactive
 openclaw security audit --deep
+```
+
+Or run the bundled repair wrapper (includes optional gateway restart + browser ensure + health check):
+
+```powershell
+cd C:\Users\Administrator\.openclaw\workspace
+powershell -NoProfile -ExecutionPolicy Bypass -File .\skills\openclaw-maintainer\scripts\repair.ps1
 ```
 
 If the watchdog keeps restarting, check `C:\Users\Administrator\.openclaw\watchdog.log` and confirm the scheduled task `OpenClaw Gateway (Interactive)` exists and points at `C:\Users\Administrator\.openclaw\gateway.cmd`.
@@ -62,7 +76,11 @@ Common meanings:
 
 Root cause is almost always **missing non-interactive GitHub credentials**.
 
-Use `C:\Users\Administrator\.openclaw\workspace\scripts\push_origin.ps1` with a PAT via `GITHUB_TOKEN`/`GH_TOKEN`.
+Preferred: SSH deploy key (no prompts). See: `references/github-push.md`.
+
+If push is blocked by GitHub secret scanning (GH013), use the `git-secrets-guard` skill to scan and safely scrub history.
+
+Fallback: PAT over HTTPS. Use `C:\Users\Administrator\.openclaw\workspace\scripts\push_origin.ps1` with `GITHUB_TOKEN`/`GH_TOKEN`.
 
 See: `references/github-push.md`.
 
