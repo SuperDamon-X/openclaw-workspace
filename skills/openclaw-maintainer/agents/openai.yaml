@@ -1,0 +1,4 @@
+interface:
+  display_name: "OpenClaw Maintainer"
+  short_description: "Triage and self-heal OpenClaw (gateway/models/browser/git)"
+  default_prompt: "Diagnose and repair OpenClaw issues end-to-end (gateway health, model auth/timeouts, browser CDP, and GitHub push)."

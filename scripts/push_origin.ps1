@@ -1,11 +1,11 @@
-Set-StrictMode -Version Latest
-$ErrorActionPreference = "Stop"
-
 param(
   [string]$RepoPath = (Resolve-Path (Join-Path $PSScriptRoot "..")).Path,
   [string]$Remote = "origin",
   [string]$Branch = "master"
 )
+
+Set-StrictMode -Version Latest
+$ErrorActionPreference = "Stop"
 
 function Assert-GitRepo([string]$Path) {
   if (-not (Test-Path $Path)) { throw "RepoPath not found: $Path" }
