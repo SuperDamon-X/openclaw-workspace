@@ -23,3 +23,6 @@ Thumbs.db
 # Private files (adjust as needed)
 # secrets.json
 # config.local.json
+
+# Large skill dumps (do not commit)
+skills/.skills_full_*/
