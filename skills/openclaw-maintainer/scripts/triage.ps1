@@ -15,6 +15,7 @@ function Run([string]$cmd) {
     Write-Host $out
     throw "Command failed ($code): $cmd"
   }
+  if ($out) { Write-Host ($out | Out-String) }
   return $out
 }
 
@@ -46,4 +47,3 @@ try { Run "openclaw security audit --deep" | Out-Null } catch { Write-Host $_.Ex
 
 Write-Host "`nEnsuring headless browser CDP (profile=chrome) is running:"
 try { Run "openclaw browser start --browser-profile chrome --json" | Out-Null } catch { Write-Host $_.Exception.Message }
-
